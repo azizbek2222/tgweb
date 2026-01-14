@@ -175,5 +175,24 @@
     </div>
     <div id="stories-viewer"></div>
     <script src="src/index.ts" type="module"></script>
+    <script>
+  // TelegramTips kanalini ochishga urinishni to'xtatish
+  const originalOpen = window.open;
+  window.open = function(url, target, features) {
+    if (url && url.includes('TelegramTips')) {
+      // Bu yerga o'z kanalingiz silkasini yozing
+      url = 'https://t.me/SizningKanalUsername'; 
+    }
+    return originalOpen.call(window, url, target, features);
+  };
+
+  // Agar havola (link) ichki routing orqali ochilsa
+  window.addEventListener('hashchange', function() {
+    if (window.location.hash.includes('TelegramTips')) {
+      window.location.hash = '#@SizningKanalUsername';
+    }
+  });
+    </script>
+    
   </body>
 </html>
